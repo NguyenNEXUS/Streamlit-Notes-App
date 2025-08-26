@@ -3,6 +3,8 @@ import base64
 import zlib
 from urllib.parse import quote, unquote
 
+BASE_URL = "https://noteslite.streamlit.app"
+
 st.set_page_config(page_title="Cloud Notes", page_icon="📝", layout="centered")
 
 # --- Helper functions ---
@@ -78,7 +80,7 @@ if st.session_state.notes:
     if st.button("Generate Share Link") and share_pw:
         combined = "\n\n".join(st.session_state.notes)
         encoded = encode_bundle(combined, share_pw)
-        share_url = f"{st.get_option('server.baseUrlPath')}/?note={quote(encoded)}"
+        share_url = f"{BASE_URL}/?note={quote(encoded)}"
         st.code(share_url, language="text")
         st.info("Give people this link + password to access your notes.")
 else:
